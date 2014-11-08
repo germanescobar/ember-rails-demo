@@ -1,0 +1,9 @@
+<script type="text/x-handlebars" id="index">
+  <form {{action 'authenticate' on='submit'}}>
+    <label for="email">Email</label>
+    {{input id='email' placeholder='Enter Email' value=email}}
+    <label for="password">Password</label>
+    {{input id='password' placeholder='Enter Password' type='password' value=password}}
+    <button type="submit">Login</button>
+  </form>
+</script>

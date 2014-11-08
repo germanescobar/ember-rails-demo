@@ -12,10 +12,26 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require handlebars
 //= require ember
 //= require ember-data
 //= require_tree .
 
 App = Ember.Application.create();
+
+App.IndexController = Ember.Controller.extend({
+  actions: {
+    authenticate: function() {
+      var data = this.getProperties('email', 'password');
+      $.ajax({
+        type: 'POST',
+        url: '/session',
+        data: data
+      }).done(function() {
+        alert("yeah chacarron");
+      }).fail(function(jqXHR) {
+        alert("oh oh " + jqXHR.status);
+      });
+    }
+  }
+});
