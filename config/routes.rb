@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :posts
+
   root 'ember#index'
 
   resource :session, only: [:create]

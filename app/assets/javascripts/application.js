@@ -19,19 +19,32 @@
 
 App = Ember.Application.create();
 
+App.Router.map(function() {
+  this.route("posts");
+});
+
 App.IndexController = Ember.Controller.extend({
   actions: {
     authenticate: function() {
-      var data = this.getProperties('email', 'password');
+      var that = this;
       $.ajax({
         type: 'POST',
         url: '/session',
-        data: data
+        data: this.getProperties('email', 'password')
       }).done(function() {
-        alert("yeah chacarron");
+        that.transitionToRoute('posts');
       }).fail(function(jqXHR) {
         alert("oh oh " + jqXHR.status);
       });
     }
   }
+});
+
+App.Post = DS.Model.extend({
+  title: DS.attr(),
+  body: DS.attr()
+});
+
+App.PostsRoute = Ember.Route.extend({
+  model: function() { return this.store.find('post'); }
 });
